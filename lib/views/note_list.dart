@@ -84,7 +84,7 @@ class _Content extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(notesProvider);
-    if (state == NotesInitial) {
+    if (state is NotesInitial) {
       return SizedBox();
     } else if (state is NotesLoading) {
       return Center(child: const CircularProgressIndicator());
