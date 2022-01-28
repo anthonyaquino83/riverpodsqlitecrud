@@ -60,14 +60,11 @@ class NotesNotifier extends StateNotifier<NotesState> {
 
     if (formInvalid == true) {
       state = NotesValidating(
-        note: editNote,
         tituloMessage: stateTituloMessage,
         conteudoMessage: stateConteudoMessage,
       );
     } else {
-      state = NotesValidated(
-        note: editNote,
-      );
+      state = NotesValidated();
     }
   }
 
