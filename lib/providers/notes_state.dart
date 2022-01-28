@@ -26,14 +26,6 @@ class NotesLoaded extends NotesState {
 
   final List<Note>? notes;
 
-  NotesLoaded copyWith({
-    List<Note>? notes,
-  }) {
-    return NotesLoaded(
-      notes: notes ?? this.notes,
-    );
-  }
-
   @override
   List<Object?> get props => [notes];
 }
