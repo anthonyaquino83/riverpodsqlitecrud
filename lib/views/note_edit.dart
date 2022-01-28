@@ -24,7 +24,6 @@ class NotesEditView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<NotesState>(notesProvider,
         (NotesState? previousState, NotesState state) {
-      print('O state é ${state}');
       if (state is NotesLoading) {
         showDialog(
             context: context,
@@ -118,8 +117,6 @@ class _NoteForm extends StatelessWidget {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (state is NotesValidating) {
-                    print(state.tituloMessage);
-                    print('validator título ' + state.tituloMessage.toString());
                     if (state.tituloMessage == '') {
                       return null;
                     } else {
@@ -153,8 +150,6 @@ class _NoteForm extends StatelessWidget {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (state is NotesValidating) {
-                    print('validator conteudo ' +
-                        state.conteudoMessage.toString());
                     if (state.conteudoMessage == '') {
                       return null;
                     } else {
@@ -170,7 +165,6 @@ class _NoteForm extends StatelessWidget {
                 width: double.infinity,
                 child: Consumer(builder: (context, ref, child) {
                   final state = ref.watch(notesProvider);
-                  print(state);
                   return ElevatedButton(
                     onPressed: state is NotesValidated
                         ? () {
