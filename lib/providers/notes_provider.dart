@@ -39,7 +39,6 @@ class NotesNotifier extends StateNotifier<NotesState> {
   }
 
   void validaForm(String titulo, String conteudo) {
-    Note editNote = Note(title: titulo, content: conteudo);
     String stateTituloMessage = '';
     String stateConteudoMessage = '';
     bool formInvalid;
