@@ -31,7 +31,7 @@ class DatabaseProvider {
     );
   }
 
-  // buscar todos os documentos
+  // buscar todos as notas
   Future<List<Note>> buscarNotas() async {
     final db = await instance.db;
     final result = await db.rawQuery('SELECT * FROM notes ORDER BY id');
