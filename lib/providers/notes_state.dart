@@ -26,14 +26,6 @@ class NotesLoaded extends NotesState {
 
   final List<Note>? notes;
 
-  NotesLoaded copyWith({
-    List<Note>? notes,
-  }) {
-    return NotesLoaded(
-      notes: notes ?? this.notes,
-    );
-  }
-
   @override
   List<Object?> get props => [notes];
 }
@@ -63,18 +55,6 @@ class NotesValidating extends NotesState {
   final String? tituloMessage;
   final String? conteudoMessage;
 
-  NotesValidating copyWith({
-    Note? note,
-    String? tituloMessage,
-    String? conteudoMessage,
-  }) {
-    return NotesValidating(
-      note: note ?? this.note,
-      tituloMessage: tituloMessage ?? this.tituloMessage,
-      conteudoMessage: conteudoMessage ?? this.conteudoMessage,
-    );
-  }
-
   @override
   List<Object?> get props => [tituloMessage, conteudoMessage];
 }
@@ -85,14 +65,6 @@ class NotesValidated extends NotesState {
   });
 
   final Note? note;
-
-  NotesValidated copyWith({
-    Note? note,
-  }) {
-    return NotesValidated(
-      note: note ?? this.note,
-    );
-  }
 
   @override
   List<Object?> get props => [note];
