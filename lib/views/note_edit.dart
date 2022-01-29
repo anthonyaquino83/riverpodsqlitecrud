@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpodcrud/models/note.dart';
 import 'package:riverpodcrud/providers/notes_provider.dart';
 import 'package:riverpodcrud/providers/notes_state.dart';
+import 'package:riverpodcrud/providers/validator_provider.dart';
+import 'package:riverpodcrud/providers/validator_state.dart';
 
 class NoteEditPage extends StatelessWidget {
   const NoteEditPage({Key? key, this.note}) : super(key: key);
@@ -100,7 +102,7 @@ class _NoteForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Consumer(builder: (context, ref, child) {
-              final state = ref.watch(notesProvider);
+              final validatorProviderState = ref.watch(validatorProvider);
               return TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Título',
@@ -110,24 +112,24 @@ class _NoteForm extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 onEditingComplete: _contentFocusNode.requestFocus,
                 onChanged: (text) {
-                  ref.read(notesProvider.notifier).validaForm(
+                  ref.read(validatorProvider.notifier).validaForm(
                       _titleController.text, _contentController.text);
                 },
                 onFieldSubmitted: (String value) {},
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (state is NotesValidating) {
-                    if (state.tituloMessage == '') {
+                  if (validatorProviderState is Validating) {
+                    if (validatorProviderState.tituloMessage == '') {
                       return null;
                     } else {
-                      return state.tituloMessage;
+                      return validatorProviderState.tituloMessage;
                     }
                   }
                 },
               );
             }),
             Consumer(builder: (context, ref, child) {
-              final state = ref.watch(notesProvider);
+              final validatorProviderState = ref.watch(validatorProvider);
               return TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Conteúdo',
@@ -136,7 +138,7 @@ class _NoteForm extends StatelessWidget {
                 focusNode: _contentFocusNode,
                 textInputAction: TextInputAction.done,
                 onChanged: (text) {
-                  ref.read(notesProvider.notifier).validaForm(
+                  ref.read(validatorProvider.notifier).validaForm(
                       _titleController.text, _contentController.text);
                 },
                 onFieldSubmitted: (String value) {
@@ -149,11 +151,11 @@ class _NoteForm extends StatelessWidget {
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (state is NotesValidating) {
-                    if (state.conteudoMessage == '') {
+                  if (validatorProviderState is Validating) {
+                    if (validatorProviderState.conteudoMessage == '') {
                       return null;
                     } else {
-                      return state.conteudoMessage;
+                      return validatorProviderState.conteudoMessage;
                     }
                   }
                 },
@@ -164,9 +166,9 @@ class _NoteForm extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: Consumer(builder: (context, ref, child) {
-                  final state = ref.watch(notesProvider);
+                  final state = ref.watch(validatorProvider);
                   return ElevatedButton(
-                    onPressed: state is NotesValidated
+                    onPressed: state is Validated
                         ? () {
                             if (_formKey.currentState!.validate()) {
                               //fechar teclado
