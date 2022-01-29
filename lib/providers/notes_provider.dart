@@ -38,35 +38,6 @@ class NotesNotifier extends StateNotifier<NotesState> {
     }
   }
 
-  // void validaForm(String titulo, String conteudo) {
-  //   String stateTituloMessage = '';
-  //   String stateConteudoMessage = '';
-  //   bool formInvalid;
-
-  //   formInvalid = false;
-  //   if (titulo == '') {
-  //     formInvalid = true;
-  //     stateTituloMessage = 'Preencha o título';
-  //   } else {
-  //     stateTituloMessage = '';
-  //   }
-  //   if (conteudo == '') {
-  //     formInvalid = true;
-  //     stateConteudoMessage = 'Preencha o conteúdo';
-  //   } else {
-  //     stateConteudoMessage = '';
-  //   }
-
-  //   if (formInvalid == true) {
-  //     state = NotesValidating(
-  //       tituloMessage: stateTituloMessage,
-  //       conteudoMessage: stateConteudoMessage,
-  //     );
-  //   } else {
-  //     state = NotesValidated();
-  //   }
-  // }
-
   Future<void> salvarNota(int? id, String titulo, String conteudo) async {
     Note editNote = Note(id: id, title: titulo, content: conteudo);
     state = NotesLoading();

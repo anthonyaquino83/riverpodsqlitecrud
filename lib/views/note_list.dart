@@ -22,47 +22,43 @@ class DocumentosView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Riverpod SQLite Crud'),
         actions: <Widget>[
-          Consumer(builder: (context, ref, _) {
-            // desativar o botao de excluir todas as notas se nao ha notas
-            if (state is NotesEmpty) {
-              return IconButton(
-                onPressed: null,
-                icon: Icon(Icons.clear_all),
-              );
-            } else {
-              return IconButton(
-                icon: Icon(Icons.clear_all),
-                onPressed: () {
-                  // excluir todas as notas
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Excluir Todas as Notas'),
-                      content: const Text('Confirmar operação?'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('Cancelar'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            ref.read(notesProvider.notifier).excluirNotas();
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(const SnackBar(
-                                content: Text('Notas excluídas com sucesso'),
-                              ));
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            }
-          }),
+          // desativar o botao de excluir todas as notas se nao ha notas
+          state is NotesEmpty
+              ? IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.clear_all),
+                )
+              : IconButton(
+                  icon: Icon(Icons.clear_all),
+                  onPressed: () {
+                    // excluir todas as notas
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Excluir Todas as Notas'),
+                        content: const Text('Confirmar operação?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancelar'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              ref.read(notesProvider.notifier).excluirNotas();
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(const SnackBar(
+                                  content: Text('Notas excluídas com sucesso'),
+                                ));
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                )
         ],
       ),
       body: _Content(),

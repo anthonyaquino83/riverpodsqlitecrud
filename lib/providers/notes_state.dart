@@ -28,20 +28,6 @@ class NotesFailure extends NotesState {
   NotesFailure();
 }
 
-// class NotesValidating extends NotesState {
-//   NotesValidating({
-//     this.tituloMessage,
-//     this.conteudoMessage,
-//   });
-
-//   final String? tituloMessage;
-//   final String? conteudoMessage;
-// }
-
-// class NotesValidated extends NotesState {
-//   NotesValidated();
-// }
-
 class NotesSuccess extends NotesState {
   NotesSuccess();
 }

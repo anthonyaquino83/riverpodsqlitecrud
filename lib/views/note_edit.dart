@@ -102,7 +102,7 @@ class _NoteForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Consumer(builder: (context, ref, child) {
-              final validatorProviderState = ref.watch(validatorProvider);
+              final state = ref.watch(validatorProvider);
               return TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Título',
@@ -118,18 +118,18 @@ class _NoteForm extends StatelessWidget {
                 onFieldSubmitted: (String value) {},
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (validatorProviderState is Validating) {
-                    if (validatorProviderState.tituloMessage == '') {
+                  if (state is Validating) {
+                    if (state.tituloMessage == '') {
                       return null;
                     } else {
-                      return validatorProviderState.tituloMessage;
+                      return state.tituloMessage;
                     }
                   }
                 },
               );
             }),
             Consumer(builder: (context, ref, child) {
-              final validatorProviderState = ref.watch(validatorProvider);
+              final state = ref.watch(validatorProvider);
               return TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Conteúdo',
@@ -151,11 +151,11 @@ class _NoteForm extends StatelessWidget {
                 },
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (validatorProviderState is Validating) {
-                    if (validatorProviderState.conteudoMessage == '') {
+                  if (state is Validating) {
+                    if (state.conteudoMessage == '') {
                       return null;
                     } else {
-                      return validatorProviderState.conteudoMessage;
+                      return state.conteudoMessage;
                     }
                   }
                 },
